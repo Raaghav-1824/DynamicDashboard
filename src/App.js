@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import { Provider } from "react-redux";
+import styled from "styled-components";
+import store from "./redux/store";
+import Dashboard from "../src/Component/Dashboard";
 
-function App() {
+// Styled components
+const AppContainer = styled.div`
+  text-align: center;
+  font-family: "Arial, sans-serif";
+  min-height: 100vh;
+  /* background-color: #e9ecef; */
+`;
+
+const Title = styled.h1`
+  color: #4a90e2;
+  margin-top: 20px;
+  font-size: 2.5rem;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <AppContainer>
+        <Title>Dynamic Dashboard</Title>
+        <Dashboard />
+      </AppContainer>
+    </Provider>
   );
-}
+};
 
 export default App;
