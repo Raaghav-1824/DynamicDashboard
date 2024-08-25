@@ -33,3 +33,25 @@ To get a local copy of the project up and running, follow these steps:
 
    ```bash
    git clone https://github.com/Raaghav-1824/DynamicDashboard.git
+
+   Navigate to the Project Directory
+
+**Change the directory to the project folder:**
+
+bash
+Copy code
+cd dashboard-app
+Install Dependencies
+
+**Install all the necessary dependencies using npm:**
+
+bash
+Copy code
+npm install
+Run the Application
+
+**Start the development server:**
+
+bash
+Copy code
+npm start
