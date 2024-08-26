@@ -1,19 +1,28 @@
-// src/Dashboard.js
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import Widget from './widget';
-import { addWidget , setSearchQuery } from '../redux/dashboardSlice';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import Widget from "./widget";
+import { addWidget, setSearchQuery } from "../redux/dashboardSlice";
+import { mobile } from "../responsive";
 
 // Styled components
 const DashboardContainer = styled.div`
   padding: 20px;
-  max-width: 800px;
+  width: 1000px;
   margin: 0 auto;
+
+  ${mobile({
+    width: "100%", 
+    padding: "10px", 
+  })};
 `;
 
 const CategoryContainer = styled.div`
   margin-bottom: 30px;
+
+  ${mobile({
+    marginBottom: "20px", 
+  })};
 `;
 
 const CategoryTitle = styled.h2`
@@ -22,6 +31,12 @@ const CategoryTitle = styled.h2`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${mobile({
+    fontSize: "1.5rem", 
+    flexDirection: "column", 
+    alignItems: "flex-start",
+  })};
 `;
 
 const AddButton = styled.button`
@@ -35,12 +50,22 @@ const AddButton = styled.button`
   &:hover {
     background-color: #357ab8;
   }
+
+  ${mobile({
+    width: "100%", 
+    padding: "10px",
+    marginTop: "10px", 
+  })};
 `;
 
 const WidgetsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+  ${mobile({
+    flexDirection: "column", 
+    gap: "10px",
+  })};
 `;
 
 const SearchInput = styled.input`
@@ -49,23 +74,31 @@ const SearchInput = styled.input`
   margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
+
+  ${mobile({
+    padding: "8px", // Reduce padding on mobile
+  })};
 `;
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { categories, searchQuery } = useSelector((state) => state.dashboard);
 
+  // Local state to keep track of the widget ID counter
+  const [widgetIdCounter, setWidgetIdCounter] = useState(2);
+
   const handleAddWidget = (categoryName) => {
-    // Generate a random number once
-    const randomNumber = Math.floor(Math.random() * 20); // Random number between 0 and 19
-  
-    // Create a new widget using the same random number
+    // Generate a new unique integer ID
+    const newWidgetId = widgetIdCounter + 1;
+    setWidgetIdCounter(newWidgetId);
+
+    // Create a new widget with the unique integer ID
     const newWidget = {
-      id: randomNumber, // Use the random number as the ID
-      name: `New Widget ${randomNumber}`, // Use the random number in the name
-      text: `Random widget text  ${randomNumber}`, // Use the random number in the text
+      id: newWidgetId,
+      name: `New Widget ${newWidgetId}`,
+      text: `Random widget text ${newWidgetId}`,
     };
-  
+
     dispatch(addWidget({ categoryName, newWidget }));
   };
 

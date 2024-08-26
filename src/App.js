@@ -10,8 +10,8 @@ const AppContainer = styled.div`
   text-align: center;
   font-family: "Arial, sans-serif";
   min-height: 100vh;
-  /* background-color: #e9ecef; */
 `;
+
 
 const Title = styled.h1`
   color: #4a90e2;
